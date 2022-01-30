@@ -20,6 +20,7 @@ namespace {
         {
           errs() << "==== INSTRUCTION ==== \n";
           errs() << I << "\n";
+          errs() << "Num Operands => " << I.getNumOperands() << "\n";
         }
             }
 
