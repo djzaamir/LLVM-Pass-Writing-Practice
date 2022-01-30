@@ -12,8 +12,20 @@ namespace {
 
     virtual bool runOnFunction(Function &F) {
       errs() << "I saw a function called " << F.getName() << "!\n";
+      for (auto &b : F)
+      {
+        errs() << "==== BLOCK ==== \n";
+        errs() << b << "\n";
+        for (auto &I : b)
+        {
+          errs() << "==== INSTRUCTION ==== \n";
+          errs() << I << "\n";
+        }
+            }
+
       return false;
     }
+
   };
 }
 
