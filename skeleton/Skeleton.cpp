@@ -3,6 +3,8 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/Transforms/IPO/PassManagerBuilder.h"
+#include "llvm/IR/InstrTypes.h"
+
 using namespace llvm;
 
 namespace {
@@ -14,15 +16,16 @@ namespace {
       errs() << "I saw a function called " << F.getName() << "!\n";
       for (auto &b : F)
       {
-        errs() << "==== BLOCK ==== \n";
-        errs() << b << "\n";
         for (auto &I : b)
         {
-          errs() << "==== INSTRUCTION ==== \n";
-          errs() << I << "\n";
-          errs() << "Num Operands => " << I.getNumOperands() << "\n";
+          //This cast will only succeed, if we get a binary opeartor
+          //A successful cast will also produce a valid poiniter, triggering our IF block
+          if(auto *OP = dyn_cast<BinaryOperator>(&I)){
+            errs() << "=======A Binary Instruction found =======\n";
+            errs() << *OP << "\n";
+          }
         }
-            }
+      }
 
       return false;
     }
