@@ -1,5 +1,14 @@
-int main(){
-  return 42;
+
+int add_two_numbers(int, int);
+
+int main(int argc, char **argv){
+  int a = 10;
+  int b = 10;
+
+  //get the result and then print it
+  int c = add_two_numbers(a, b);
+
+  return c;
 }
 
 
